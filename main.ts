@@ -1,4 +1,4 @@
-//% color=#5431ad
+//% color=#62508f
 //% block="Multi Events"
 namespace multiEvents {
     //% blockId=multi_events_onCreated
