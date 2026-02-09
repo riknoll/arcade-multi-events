@@ -38,7 +38,7 @@ namespace multiEvents {
     //% group=Global
     export function onOverlap(kinds: number[], otherKinds: number[], handler: (sprite: Sprite, otherSprite: Sprite) => void) {
         for (const kind of kinds) {
-            for (const otherKind of kinds) {
+            for (const otherKind of otherKinds) {
                 sprites.onOverlap(kind, otherKind, handler);
             }
         }
