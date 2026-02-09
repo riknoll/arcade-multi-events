@@ -48,7 +48,7 @@ namespace multiEvents {
     //% block="on $sprite of kind $kinds overlaps $tiles at $location"
     //% draggableParameters="reporter"
     //% kinds.shadow=multi_events_spriteKinds
-    //% tiles.shadow=multi_events_tiles
+    //% tiles.shadow=multi_events_tileList
     //% help=scene/on-overlap-tile
     //% weight=70
     //% group=Global
@@ -115,7 +115,7 @@ namespace multiEvents {
     //% block="on $sprite of kind $kinds overlaps $tiles at $location"
     //% draggableParameters="reporter"
     //% kinds.shadow=multi_events_spriteKinds
-    //% tiles.shadow=multi_events_tiles
+    //% tiles.shadow=multi_events_tileList
     //% help=scene/on-overlap-tile
     //% weight=70
     //% group=Local
@@ -134,6 +134,38 @@ namespace multiEvents {
     //% handlerStatement=1
     export function onHitWallLocal(kinds: number[], handler: (sprite: Sprite, location: tiles.Location) => void) {
         onHitWall(kinds, handler);
+    }
+
+    //% blockId=multi_events_allOfKind
+    //% block="array of sprites of kind $kinds"
+    //% kinds.shadow=multi_events_spriteKinds
+    //% help=sprites/all-of-kind
+    //% weight=110
+    //% group=Arrays
+    export function allOfKind(kinds: number[]): Sprite[] {
+        const result: Sprite[] = [];
+        for (const kind of kinds) {
+            for (const sprite of sprites.allOfKind(kind)) {
+                result.push(sprite);
+            }
+        }
+        return result;
+    }
+
+    //% blockId=multi_events_getTilesByType
+    //% block="array of all $tileImages locations"
+    //% tileImages.shadow=multi_events_tileList
+    //% help=tiles/get-tiles-by-type
+    //% weight=100
+    //% group=Arrays
+    export function getTilesByType(tileImages: Image[]): tiles.Location[] {
+        const result: tiles.Location[] = [];
+        for (const tile of tileImages) {
+            for (const location of tiles.getTilesByType(tile)) {
+                result.push(location);
+            }
+        }
+        return result;
     }
 
     //% blockId=multi_events_spriteKinds
@@ -176,7 +208,7 @@ namespace multiEvents {
         return all;
     }
 
-    //% blockId=multi_events_tiles
+    //% blockId=multi_events_tileList
     //% block="$tile1||or $tile2 or $tile3 or $tile4 or $tile5 or $tile6 or $tile7 or $tile8 or $tile9"
     //% tile1.shadow=tileset_tile_picker
     //% tile2.shadow=tileset_tile_picker
@@ -190,7 +222,7 @@ namespace multiEvents {
     //% inlineInputMode=inline
     //% weight=0
     //% group=Arrays
-    export function tiles(
+    export function tileList(
         tile1: Image,
         tile2?: Image,
         tile3?: Image,
